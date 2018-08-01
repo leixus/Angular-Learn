@@ -1,0 +1,14 @@
+<h1>第一个属性指令</h1>
+
+<h4>选择高亮颜色</h4>
+
+<div>
+    <input type="radio" name="colors" (click)="color = 'lightgreen'" />Green
+    <input type="radio" name="colors" (click)="color = 'yellow'" />Yellow
+    <input type="radio" name="colors" (click)="color = 'cyan'" />Cyan
+</div>
+
+<p [appHighlight]="color">高亮 me</p>
+
+
+<p [appHighlight]="color" defaultColor="violet">高亮 me</p>

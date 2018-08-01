@@ -1,0 +1,15 @@
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-touched[minlength], .ng-valid.required  {
+  border-left: 5px solid yellowgreen; /* yellowgreen */
+}
+
+.ng-valid[forbiddenName], .ng-valid.required  {
+  border-left: 5px solid blueviolet; /* blueviolet */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
