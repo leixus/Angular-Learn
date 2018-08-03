@@ -48,6 +48,10 @@ export const routes: Routes = [
                 path: 'attributeDirectives',
                 loadChildren: './attributeDirectives/attributeDirectives.module#AttributeDirectivesModule'
             },
+            {
+                path: 'structuralDirectives',
+                loadChildren: './structuralDirectives/structuralDirectives.module#StructuralDirectivesModule'
+            },
         ]
     }
 ];

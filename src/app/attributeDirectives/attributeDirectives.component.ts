@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 /**
- * 表单组件
+ * 属性指令
  * @class AttributeDirectivesComponent
  */
 @Component({
@@ -12,7 +12,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class AttributeDirectivesComponent implements OnInit {
 
-  constructor() {}
+  color: string;
+
+  constructor() {
+      this.color = 'yellow';
+  }
 
   ngOnInit() {}
+
 }
