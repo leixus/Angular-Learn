@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Angular-Learn": {
+    "Angular-learn": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Angular-Learn",
+            "outputPath": "dist/Angular-learn",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -43,25 +43,32 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Angular-Learn:build"
+            "browserTarget": "Angular-learn:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Angular-Learn:build:production"
+              "browserTarget": "Angular-learn:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Angular-Learn:build"
+            "browserTarget": "Angular-learn:build"
           }
         },
         "test": {
@@ -95,15 +102,21 @@
         }
       }
     },
-    "Angular-Learn-e2e": {
+    "Angular-learn-e2e": {
       "root": "e2e/",
       "projectType": "application",
+      "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Angular-Learn:serve"
+            "devServerTarget": "Angular-learn:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "Angular-learn:serve:production"
+            }
           }
         },
         "lint": {
@@ -118,5 +131,5 @@
       }
     }
   },
-  "defaultProject": "Angular-Learn"
+  "defaultProject": "Angular-learn"
 }
