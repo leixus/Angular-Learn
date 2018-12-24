@@ -1,3 +1,103 @@
-<p>
-  template-form works!
-</p>
+模板驱动表单
+<div class="container">
+  <form [hidden]="submitted" (ngSubmit)="onSubmit()"
+        #heroForm="ngForm"
+        appIdentityRevealed>
+
+    {{diagnostic}}
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" class="form-control"
+             [(ngModel)]="hero.name"
+             name="name"
+             #name="ngModel"
+             required
+             minlength="4"
+             appForbiddenName="bob"
+             #spy>
+    </div>
+    <!--{{name.invalid}}-->
+    <!--{{name.dirty}}-->
+    <!--{{name.touched}}-->
+
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+         class="alert alert-danger">
+      <div *ngIf="name.errors.required">
+        不能为空.
+      </div>
+      <div *ngIf="name.errors.minlength">
+        长度不能小于4
+      </div>
+      <div *ngIf="name.errors.forbiddenName">
+        不能出现Bob.
+      </div>
+    </div>
+    <!--<div [hidden]="name.valid || name.pristine"-->
+         <!--class="alert alert-danger">-->
+      <!--Name is required-->
+    <!--</div>-->
+    <!--<br>TODO: remove this: {{spy.className}}-->
+
+
+    <div class="form-group">
+      <label for="alterEgo">Alter Ego</label>
+      <input id="alterEgo" class="form-control" name="alterEgo"
+             #alterEgo="ngModel"
+             [(ngModel)]="hero.alterEgo"
+             [ngModelOptions]="{ updateOn: 'blur' }"
+             appUniqueAlterEgo>
+
+      <div *ngIf="alterEgo.pending">验证...</div>
+      <div *ngIf="alterEgo.invalid" class="alert alert-danger alter-ego-errors">
+        <div *ngIf="alterEgo.errors?.uniqueAlterEgo">
+          已经被使用.
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="heroForm.errors?.identityRevealed && (heroForm.touched || heroForm.dirty)" class="cross-validation-error-message alert alert-danger">
+      姓名和alterEgo不能一样.
+    </div>
+
+    <div class="form-group">
+      <label for="power">Hero Power</label>
+      <select class="form-control" id="power"
+              required name="power"
+              [(ngModel)]="hero.power"
+              #power="ngModel">
+        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+        <!--<option *ngFor="let pow of []" [value]="pow">{{pow}}</option>-->
+      </select>
+    </div>
+
+    <!--<div class="form-group">-->
+      <!--<label for="alterEgo">Alter Ego</label>-->
+      <!--<input type="text" class="form-control" id="alterEgo">-->
+    <!--</div>-->
+
+    <button type="submit" [disabled]="!heroForm.form.valid" class="btn btn-success">Submit</button>
+
+    <button type="button" class="btn btn-default"
+            (click)="heroForm.resetForm({})">Reset</button>
+
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h2>You submitted the following:</h2>
+  <div class="row">
+    <div class="col-xs-3">Name</div>
+    <div class="col-xs-9  pull-left">{{ hero.name }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Alter Ego</div>
+    <div class="col-xs-9 pull-left">{{ hero.alterEgo }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Power</div>
+    <div class="col-xs-9 pull-left">{{ hero.power }}</div>
+  </div>
+  <br>
+  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+</div>
